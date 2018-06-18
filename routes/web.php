@@ -35,3 +35,5 @@ Route::get('comments/{id}/delete', 'CommentController@delete')->name('comments.d
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::impersonate();

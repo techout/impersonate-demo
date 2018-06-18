@@ -14,22 +14,28 @@
 
         <ul class="navbar-nav">
             @guest
-            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
 
             @else
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown">
-                <a class="dropdown-item" href="{{route('posts.index')}}">Posts</a>
-                <a class="dropdown-item" href="{{route('categories.index')}}">Categories</a>
-                <a class="dropdown-item" href="{{route('tags.index')}}">Tags</a>
-                <div class="dropdown-divider"></div>
-                {!!Form::open(['route' => 'logout', 'method' => 'POST'])!!}
-                    {{Form::submit('Logout', ['class' => 'btn dropdown-item'])}}
-                {!!Form::close()!!}
-                </div>
-            </li>
+                @impersonating
+                    <a href="{{route('impersonate.leave')}}" class="btn btn-success">Leave Impersonate</a>
+                @else
+                    <a href="{{route('impersonate', 2)}}" class="btn btn-primary">Impersonate User</a>
+                @endImpersonating
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown">
+                    <a class="dropdown-item" href="{{route('posts.index')}}">Posts</a>
+                    <a class="dropdown-item" href="{{route('categories.index')}}">Categories</a>
+                    <a class="dropdown-item" href="{{route('tags.index')}}">Tags</a>
+                    <div class="dropdown-divider"></div>
+                    {!!Form::open(['route' => 'logout', 'method' => 'POST'])!!}
+                        {{Form::submit('Logout', ['class' => 'btn dropdown-item'])}}
+                    {!!Form::close()!!}
+                    </div>
+                </li>
             @endguest
         </ul>
         <form class="form-inline my-2 my-md-0">

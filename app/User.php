@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable
 {
+    use Impersonate;
     use Notifiable;
 
     /**
@@ -29,5 +31,14 @@ class User extends Authenticatable
 
     public function posts(){
         return $this->hasMany('App\Post');
+    }
+
+    // impersonate test
+    public function canImpersonate(){
+        return true;
+    }
+
+    public function canBeImpersonated(){
+        return true;
     }
 }
