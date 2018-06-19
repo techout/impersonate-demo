@@ -11,7 +11,7 @@ class BlogController extends Controller
 {
     public function getIndex(){
         $posts = Post::paginate(10);
-        $users = User::getImpersonatable();
+        $users = User::allImpersonatable();
         return view('blog.index')->with('posts', $posts)->with('users', $users);
     } // end getIndex()
 

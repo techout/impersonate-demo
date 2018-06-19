@@ -37,15 +37,27 @@ class User extends Authenticatable
 
     // impersonate test
     public function canImpersonate(){
-        return true;
+        return ($this->is_superAdmin() || $this->is_admin());
     }
 
     public function canBeImpersonated(){
-        return true;
+        return !($this->is_superAdmin());
     }
 
-    public static function getImpersonatable(){
-        $r = User::where('id', '!=', Auth::id())->get();
-        return $r;
+    public static function allImpersonatable(){
+        return User::where([
+                ['type_id', '!=', '1'],
+                ['id', '!=', Auth::id()]
+            ])->get();
     }
+
+    public function is_superAdmin(){
+        return $this->type_id == '1';
+    }
+
+    public function is_admin(){
+        return $this->type_id == '2';
+    }
+
+
 }

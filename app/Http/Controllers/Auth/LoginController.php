@@ -38,7 +38,13 @@ class LoginController extends Controller
     }
 
     public function logout () {
-        //logout user
+        // stop impersonating
+        $manager = app('impersonate');
+        if($manager->isImpersonating()){
+            $manager->leave();
+        }
+
+        // logout user
         auth()->logout();
         // redirect to homepage
         return redirect('/');
