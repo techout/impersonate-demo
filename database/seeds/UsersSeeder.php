@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // this should work, if not, separate them into separate DB::table() calls
         DB::table('users')->insert([
             [
                 'name' => 'sadmin',

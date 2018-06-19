@@ -14,7 +14,7 @@ class AddTypeToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('type_id')->unsigned()->after('email');
+            $table->integer('type_id')->unsigned()->default('3')->after('email');
         });
 
         Schema::create('userTypes', function (Blueprint $table) {
