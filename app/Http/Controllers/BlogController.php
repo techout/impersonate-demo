@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Post;
+use App\User;
 
 class BlogController extends Controller
 {
     public function getIndex(){
         $posts = Post::paginate(10);
-        return view('blog.index')->with('posts', $posts);
+        $users = User::getImpersonatable();
+        return view('blog.index')->with('posts', $posts)->with('users', $users);
     } // end getIndex()
 
     public function getSingle($slug){

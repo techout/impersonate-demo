@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
 
+use Auth;
+
 class User extends Authenticatable
 {
     use Impersonate;
@@ -40,5 +42,10 @@ class User extends Authenticatable
 
     public function canBeImpersonated(){
         return true;
+    }
+
+    public static function getImpersonatable(){
+        $r = User::where('id', '!=', Auth::id())->get();
+        return $r;
     }
 }

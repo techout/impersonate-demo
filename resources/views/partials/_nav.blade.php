@@ -21,7 +21,7 @@
                 @impersonating
                     <a href="{{route('impersonate.leave')}}" class="btn btn-success">Leave Impersonate</a>
                 @else
-                    <a href="{{route('impersonate', 2)}}" class="btn btn-primary">Impersonate User</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#impersonate_modal">Impersonate</a>
                 @endImpersonating
 
                 <li class="nav-item dropdown">

@@ -6,6 +6,8 @@
     @include('partials._css')
   </head>
   <body>
+    @include('partials._modals')
+
     @include('partials._nav')
 
     <main class="container" role="main">
