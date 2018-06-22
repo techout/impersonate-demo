@@ -37,3 +37,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::impersonate();
+
+
+Route::get('/api/users', function(){
+    return App\User::allImpersonatable();
+});

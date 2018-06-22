@@ -8,27 +8,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                @isset($users)
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>User Name</th>
-                                <th>Email</th>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr v-for="user in users">
+                                <td>@{{user.id}}</td>
+                                <td><a :href="'impersonate/take/' + user.id" class="btn btn-default">@{{user.name}}</a></td>
+                                <td>@{{user.email}}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td>{{$user->id}}</td>
-                                    <td><a href="{{route('impersonate', $user->id)}}" class="btn btn-default">{{$user->name}}</a></td>
-                                    <td>{{$user->email}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @endisset
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+

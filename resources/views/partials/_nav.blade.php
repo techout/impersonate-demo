@@ -21,7 +21,7 @@
                 @impersonating
                     <a href="{{route('impersonate.leave')}}" class="btn btn-success">Leave Impersonate</a>
                 @else
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#impersonate_modal">Impersonate</a>
+                    <a href="" id="imp" class="btn btn-primary" data-toggle="modal" data-target="#impersonate_modal" @click="getImpersonatable()">Impersonate</a>
                 @endImpersonating
 
                 <li class="nav-item dropdown">
@@ -43,3 +43,25 @@
         </form>
     </div>
 </nav>
+
+
+@section('js')
+    {!!Html::script(asset('js/app.js'))!!}
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script>
+        var v = new Vue({
+            el: '#app',
+            data: {
+                users: []
+            },
+            methods: {
+                getImpersonatable: function(){
+                    this.$http.get('/api/users')
+                        .then(function(response){
+                            this.users = response.data;
+                    });
+                }
+            }
+        })
+    </script>
+@endsection

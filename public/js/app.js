@@ -13894,7 +13894,17 @@ window.Vue = __webpack_require__(36);
 Vue.component('example-component', __webpack_require__(39));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app',
+    data: {
+        users: []
+    },
+    methods: {
+        getImpersonatable: function getImpersonatable() {
+            this.$http.get('/api/users').then(function (response) {
+                this.users = response.data;
+            });
+        }
+    }
 });
 
 /***/ }),

@@ -34,8 +34,18 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany('App\Post');
     }
+    
+    /////////////////////////////////////////////
+    // Impersonate functions
+    /////////////////////////////////////////////
+    public function is_superAdmin(){
+        return $this->type_id == '1';
+    }
 
-    // impersonate test
+    public function is_admin(){
+        return $this->type_id == '2';
+    }
+
     public function canImpersonate(){
         return ($this->is_superAdmin() || $this->is_admin());
     }
@@ -50,14 +60,4 @@ class User extends Authenticatable
                 ['id', '!=', Auth::id()]
             ])->get();
     }
-
-    public function is_superAdmin(){
-        return $this->type_id == '1';
-    }
-
-    public function is_admin(){
-        return $this->type_id == '2';
-    }
-
-
 }

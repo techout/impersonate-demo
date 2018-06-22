@@ -6,17 +6,19 @@
     @include('partials._css')
   </head>
   <body>
-    @include('partials._modals')
+    <div id="app">
+      @include('partials._modals')
 
-    @include('partials._nav')
+      @include('partials._nav')
 
-    <main class="container" role="main">
-        @include('partials._messages')
+      <main class="container" role="main">
+          @include('partials._messages')
 
-        @yield('content')
-        
-        @include('partials._footer')
-    </main>
+          @yield('content')
+          
+          @include('partials._footer')
+      </main>
+    </div>
 
     @include('partials._js')
   </body>
