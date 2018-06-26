@@ -16,12 +16,12 @@
                             <th>Email</th>
                         </tr>
                     </thead>
-                    <tbody>
-                            <tr v-for="user in users">
-                                <td>@{{user.id}}</td>
-                                <td><a :href="'impersonate/take/' + user.id" class="btn btn-default">@{{user.name}}</a></td>
-                                <td>@{{user.email}}</td>
-                            </tr>
+                    <tbody id="ImpersonateModal">
+                        <tr v-for="user in users">
+                            <td>@{{user.id}}</td>
+                            <td><a :href="'impersonate/take/' + user.id" class="btn btn-default">@{{user.name}}</a></td>
+                            <td>@{{user.email}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

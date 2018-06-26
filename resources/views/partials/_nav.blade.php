@@ -21,7 +21,7 @@
                 @impersonating
                     <a href="{{route('impersonate.leave')}}" class="btn btn-success">Leave Impersonate</a>
                 @else
-                    <a href="" id="imp" class="btn btn-primary" data-toggle="modal" data-target="#impersonate_modal" @click="getImpersonatable()">Impersonate</a>
+                    <a href="" id="ImpersonateButton" class="btn btn-primary" data-toggle="modal" data-target="#impersonate_modal">Impersonate</a>
                 @endImpersonating
 
                 <li class="nav-item dropdown">
@@ -46,22 +46,31 @@
 
 
 @section('js')
-    {!!Html::script(asset('js/app.js'))!!}
-    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script>
-        var v = new Vue({
-            el: '#app',
-            data: {
-                users: []
-            },
-            methods: {
-                getImpersonatable: function(){
-                    this.$http.get('/api/users')
-                        .then(function(response){
-                            this.users = response.data;
-                    });
-                }
-            }
-        })
+        $(document).ready(function(){
+            $('#ImpersonateButton').click(function(){
+                $.ajax({
+                    method: 'GET',
+                    url: '/api/users',
+                    success: function(data){
+                        var new_row, dest = $('tbody#ImpersonateModal');
+                        if(!dest.length) return false;
+                        dest.html('');
+
+                        $.each(data, function(k, v){
+                            new_row = '<tr>';
+
+                            new_row += '<td>' + data[k]['id'] + '</td>';
+                            new_row += '<td><a href="impersonate/take/' + data[k]['id'] + '" class="btn btn-default">' + data[k]['name'] + '</a></td>';
+                            new_row += '<td>' + data[k]['email'] + '</td>';
+                            
+                            new_row += '</tr>';
+
+                            dest.append(new_row);
+                        });
+                    }
+                });
+            });
+        });
     </script>
 @endsection
