@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
     <a class="navbar-brand" href="#">Laravel Blog</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,11 +19,32 @@
                 <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
 
             @else
-                @impersonating
-                    <a href="{{route('impersonate.leave')}}" class="btn btn-success">Leave Impersonate</a>
-                @else
-                    <a href="" id="ImpersonateButton" class="btn btn-primary" data-toggle="modal" data-target="#impersonate_modal">Impersonate</a>
-                @endImpersonating
+                <div class="btn-group btn-sm">
+                    @impersonating
+                        <a href="{{route('impersonate.leave')}}" class="btn btn-secondary btn-sm">
+                            <span class="fa-layers fa-fw">
+                                <i class="fas fa-user-secret"></i>
+                                <i class="fas fa-ban fa-2x" data-fa-transform="left-3" style="color:Tomato"></i>
+                            </span>
+                            <span class="sr-only">Leave Impersonate</span>
+                        </a>
+                    @else
+                        <a href="" id="ImpersonateButton" class="btn btn-secondary btn-sm" role="button" data-toggle="modal" data-target="#impersonate_modal">
+                            <i class="fas fa-user-secret"></i>
+                            <span class="sr-only">Impersonate User</span>
+                        </a>
+                    @endImpersonating
+                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Item</a>
+                        <a href="#" class="dropdown-item">Item</a>
+                        <a href="#" class="dropdown-item">Item</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">Item</a>
+                    </div>
+                </div>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</a>

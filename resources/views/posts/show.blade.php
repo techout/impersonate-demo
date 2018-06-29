@@ -35,8 +35,12 @@
                             <td>{{$comment->email}}</td>
                             <td>{{$comment->comment}}</td>
                             <td>
-                                <a href="{{route('comments.edit', $comment->id)}}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <a href="{{route('comments.delete', $comment->id)}}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a href="{{route('comments.edit', $comment->id)}}" class="btn btn-xs btn-primary">
+                                    <i class="fas fa-edit"></i><span class="sr-only">Edit</span>
+                                </a>
+                                <a href="{{route('comments.delete', $comment->id)}}" class="btn btn-xs btn-danger">
+                                    <i class="fas fa-trash"></i><span class="sr-only">Delete</span>
+                                </a>
                             </td>
                         </tr>
                         

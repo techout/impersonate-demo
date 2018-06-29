@@ -19,7 +19,7 @@
           @include('partials._footer')
       </main>
     </div>
-
+    
     @include('partials._js')
   </body>
 </html>

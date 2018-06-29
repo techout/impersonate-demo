@@ -18,7 +18,7 @@
 
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h3 class="comments-title"><span class="glyphicon glyphicon-comment"></span> {{$post->comments()->count()}} Comments</h3>
+            <h3 class="comments-title"><i class="fas fa-comment-alt"></i> {{$post->comments()->count()}} Comments</h3>
             @foreach($post->comments as $comment)
                 <div class="comment">
                     <div class="author-info">
