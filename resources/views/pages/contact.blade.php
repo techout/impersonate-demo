@@ -7,24 +7,15 @@
         <div class="col-md-12">
             <h1>Contact Me</h1>
             <hr>
-            <form action="{{url('contact')}}" method="POST">
-                {{csrf_field()}}
+            {!! Form::open(['url' => url('contact'), 'method' => 'POST']) !!}
+                {{Form::TextGroup('email')}}
 
-                <div class="form-group">
-                    <label name="email">Email:</label>
-                    <input type="text" id="email" name="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label name="subject">Subject:</label>
-                    <input type="text" id="subject" name="subject" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label name="message">Message:</label>
-                    <textarea id="message" name="message" class="form-control"></textarea>
-                </div>
+                {{Form::TextGroup('subject')}}
 
-                <input type="submit" value="Send Message" class="btn btn-success">
-            </form>
+                {{Form::TextAreaGroup('message')}}
+
+                {{Form::submit('Send Message', ['class' => 'btn btn-success'])}}
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection

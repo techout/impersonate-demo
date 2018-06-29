@@ -12,18 +12,11 @@
     <hr>
 
     {!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-        {{Form::label('title', 'Title:')}}
-        {{Form::text('title', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255'])}}
+        {{Form::TextGroup('title', null, null, null, ['required' => '', 'maxlength' => '255'])}}
 
-        {{Form::label('slug', 'Slug:')}}
-        {{Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minLength' => '5', 'maxlength' => '255'])}}
+        {{Form::TextGroup('slug', null, null, null, ['required' => '', 'minLength' => '5', 'maxlength' => '255'])}}
 
-        {{Form::label('category_id', 'Category:')}}
-        <select class="form-control" name="category_id">
-            @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-        </select>
+        {{Form::SelectGroup('category_id', 'Category', $categories, 'id', 'name')}}
 
         {{Form::label('tags', 'Tags:')}}
         <select class="form-control select2-multi" name="tags[]" multiple="multiple">
@@ -32,11 +25,9 @@
             @endforeach
         </select>
 
-        {{Form::label('featured_image', 'Upload Featured Image:')}}
-        {{Form::file('featured_image', ['class' => 'form-control'])}}
+        {{Form::FileGroup('featured_image', 'Upload Image')}}
 
-        {{Form::label('body', 'Body:')}}
-        {{Form::textarea('body', null, ['class' => 'form-control', 'required' => ''])}}
+        {{Form::TextAreaGroup('body', null, null, null, ['required' => ''])}}
 
         {{Form::submit('Create Post', ['class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top: 20px;'])}}
     {!! Form::close() !!}
