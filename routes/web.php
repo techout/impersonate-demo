@@ -38,6 +38,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::impersonate();
 
+Route::resource('cards', 'CardController');
 
 Route::get('/api/users', function(){
     return App\User::allImpersonatable();
