@@ -84,7 +84,7 @@
                     complete: function(data){
                         var table = $('table#ImpersonateTable');
                         if(!table.length) return false;
-                        if($.fn.DataTable.isDataTable(table)) return false;
+                        if($.fn.DataTable.isDataTable(table)) table.DataTable().destroy();
                         
                         table.DataTable({
                             dom: 'ftp'
