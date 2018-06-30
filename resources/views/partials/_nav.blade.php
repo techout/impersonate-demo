@@ -19,32 +19,23 @@
                 <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
 
             @else
-                <div class="btn-group btn-sm">
-                    @impersonating
-                        <a href="{{route('impersonate.leave')}}" class="btn btn-secondary btn-sm">
-                            <span class="fa-layers fa-fw">
-                                <i class="fas fa-user-secret"></i>
-                                <i class="fas fa-ban fa-2x" data-fa-transform="left-3" style="color:Tomato"></i>
-                            </span>
-                            <span class="sr-only">Leave Impersonate</span>
-                        </a>
-                    @else
-                        <a href="" id="ImpersonateButton" class="btn btn-secondary btn-sm" role="button" data-toggle="modal" data-target="#impersonate_modal">
-                            <i class="fas fa-user-secret"></i>
-                            <span class="sr-only">Impersonate User</span>
-                        </a>
-                    @endImpersonating
-                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Item</a>
-                        <a href="#" class="dropdown-item">Item</a>
-                        <a href="#" class="dropdown-item">Item</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">Item</a>
+                @canImpersonate
+                    <div class="btn-group btn-sm">
+                        @impersonating
+                            @include('nav.impersonate._leave')
+                        @else
+                            @include('nav.impersonate._take')
+                        @endImpersonating
+                        @include('nav.impersonate._dropdown')
                     </div>
-                </div>
+                @else
+                    @impersonating
+                        <div class="btn-group btn-sm">
+                            @include('nav.impersonate._leave')
+                            @include('nav.impersonate._dropdown')
+                        </div>
+                    @endImpersonating
+                @endCanImpersonate
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</a>
@@ -66,18 +57,17 @@
     </div>
 </nav>
 
-
 @section('js')
     <script>
         $(document).ready(function(){
-            $('#ImpersonateButton').click(function(){
+            $('.ImpersonateButton').click(function(){
                 $.ajax({
                     method: 'GET',
                     url: '/api/users',
                     success: function(data){
-                        var new_row, dest = $('tbody#ImpersonateModal');
-                        if(!dest.length) return false;
-                        dest.html('');
+                        var new_row, table = $('table#ImpersonateTable');
+                        if(!table.length) return false;
+                        table.find('tbody').html('');
 
                         $.each(data, function(k, v){
                             new_row = '<tr>';
@@ -88,7 +78,16 @@
                             
                             new_row += '</tr>';
 
-                            dest.append(new_row);
+                            table.find('tbody').append(new_row);
+                        });
+                    },
+                    complete: function(data){
+                        var table = $('table#ImpersonateTable');
+                        if(!table.length) return false;
+                        if($.fn.DataTable.isDataTable(table)) return false;
+                        
+                        table.DataTable({
+                            dom: 'ftp'
                         });
                     }
                 });
