@@ -36,7 +36,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::impersonate();
+Route::group(['middleware' => 'impersonate'], function(){
+    Route::impersonate();
+});
 
 Route::resource('cards', 'CardController');
 
