@@ -57,7 +57,7 @@
     </div>
 </nav>
 
-@section('js')
+@push('js')
     <script>
         $(document).ready(function(){
             $('.ImpersonateButton').click(function(){
@@ -94,4 +94,4 @@
             });
         });
     </script>
-@endsection
+@endpush

@@ -2,10 +2,10 @@
 
 @section('title', ' | Create Post')
 
-@section('css')
+@push('css')
     {!!Html::style('css/parsley.css')!!}
     {!!Html::style('css/select2.min.css')!!}
-@endsection
+@endpush
 
 @section('content')
     <h1>Create New Post</h1>
@@ -33,7 +33,7 @@
     {!! Form::close() !!}
 @endsection
 
-@section('js')
+@push('js')
     {!!Html::script('js/parsley.min.js')!!}
     {!!Html::script('js/select2.min.js')!!}
     <script type="text/javascript">
@@ -49,4 +49,4 @@
         });
     </script>
 
-@endsection
+@endpush

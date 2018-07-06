@@ -2,10 +2,10 @@
 
 @section('title', ' | Edit Post')
 
-@section('css')
+@push('css')
     {!!Html::style('css/parsley.css')!!}
     {!!Html::style('css/select2.min.css')!!}
-@endsection
+@endpush
 
 @section('content')
 {!!Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true])!!}

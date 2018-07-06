@@ -6,4 +6,4 @@
 
 {{Html::style('css/datatables.min.css')}}
 
-@yield('css')
+@stack('css')

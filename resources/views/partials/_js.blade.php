@@ -3,4 +3,4 @@
 
 {{Html::script('/js/datatables.min.js')}}
 
-@yield('js')
+@stack('js')
