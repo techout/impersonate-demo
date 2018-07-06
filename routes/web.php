@@ -45,3 +45,7 @@ Route::resource('cards', 'CardController');
 Route::get('/api/users', function(){
     return App\User::allImpersonatable();
 });
+
+Route::get('/api/getRecentImpersonates', function(){
+    return App\Impersonate::recentImpersonates();
+});

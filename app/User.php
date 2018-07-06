@@ -31,10 +31,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function impersonates(){
+        return $this->hasMany('App\Impersonate');
+    }
+
     public function posts(){
         return $this->hasMany('App\Post');
     }
-    
+
     /////////////////////////////////////////////
     // Impersonate functions
     /////////////////////////////////////////////

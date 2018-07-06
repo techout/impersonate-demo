@@ -9,5 +9,27 @@
         <a href="" class="dropdown-item disabled">Leave Impersonate</a>
     @endImpersonating
     <div class="dropdown-divider"></div>
-    <a href="#" class="dropdown-item">(Recent Impersonates)</a>
 </div>
+
+@push('js')
+<script>
+    $(document).ready(function(){
+        $("#ImpersonateDropdown").on('show.bs.dropdown', function(){
+            $.ajax({
+                method: 'GET',
+                url: '/api/getRecentImpersonates',
+                success: function(data){
+                    $dropdown = $('#ImpersonateRecents');
+                    if(!$dropdown.length) return false;
+                    $dropdown.html("");
+
+                    $.each(data, function(k, v){
+                        $dropdown.append('<a class="dropdown-item" href="impersonate/take/' + data[k]['imp_user_id'] + '">' + data[k]['impersonated_user']['name'] + '</a>')
+                    });
+                }
+            });
+        });
+    });
+
+</script>
+@endpush

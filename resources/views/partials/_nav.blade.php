@@ -20,7 +20,7 @@
 
             @else
                 @canImpersonate
-                    <div class="btn-group btn-sm">
+                    <div id="ImpersonateDropdown" class="btn-group btn-sm dropdown">
                         @impersonating
                             @include('nav.impersonate._leave')
                         @else
@@ -30,7 +30,7 @@
                     </div>
                 @else
                     @impersonating
-                        <div class="btn-group btn-sm">
+                        <div id="ImpersonateDropdown" class="btn-group btn-sm dropdown">
                             @include('nav.impersonate._leave')
                             @include('nav.impersonate._dropdown')
                         </div>
