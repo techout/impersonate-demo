@@ -23,6 +23,6 @@ class Impersonate extends Model
 
         if($manager->isImpersonating()) $user_id = $manager->getImpersonatorId();
 
-        return Impersonate::where('user_id', '=', $user_id)->with('ImpersonatedUser')->get();
+        return Impersonate::where('user_id', '=', $user_id)->with('ImpersonatedUser')->orderBy('updated_at', 'DESC')->get();
     }
 }

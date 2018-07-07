@@ -61,7 +61,8 @@ class User extends Authenticatable
     public static function allImpersonatable(){
         return User::where([
                 ['type_id', '!=', '1'],
-                ['id', '!=', Auth::id()]
+                ['id', '!=', Auth::id()],
+                ['id', '!=', app('impersonate')->getImpersonatorId()]
             ])->get();
     }
 }

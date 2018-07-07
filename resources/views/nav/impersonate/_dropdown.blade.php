@@ -9,6 +9,7 @@
         <a href="" class="dropdown-item disabled">Leave Impersonate</a>
     @endImpersonating
     <div class="dropdown-divider"></div>
+    <div id="ImpersonateRecents"></div>
 </div>
 
 @push('js')
@@ -19,7 +20,7 @@
                 method: 'GET',
                 url: '/api/getRecentImpersonates',
                 success: function(data){
-                    $dropdown = $('#ImpersonateRecents');
+                    $dropdown = $('div#ImpersonateRecents');
                     if(!$dropdown.length) return false;
                     $dropdown.html("");
 

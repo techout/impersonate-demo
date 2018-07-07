@@ -7,6 +7,7 @@ use App\User;
 use Auth;
 use Closure;
 use DB;
+use Carbon\Carbon;
 
 class ImpersonateMiddleware
 {
@@ -30,20 +31,32 @@ class ImpersonateMiddleware
             $impersonated_user_id = array_pop($url_arr);
 
             if(Auth::user()->canImpersonate() && User::find($impersonated_user_id)->canBeImpersonated()){
-                // save the impersonation
-                $impersonate = new Impersonate;
-                $impersonate->user_id = Auth::id();
-                $impersonate->imp_user_id = $impersonated_user_id;
-                $impersonate->save();
-    
-                // keep only the 5 most recent impersonations
-                $impersonations = Impersonate::where('user_id', '=', Auth::id())->orderBy('created_at', 'desc')->get();
-                if($impersonations->count() > Impersonate::MAX){
-                    $index = 1;
-                    foreach($impersonations as $impersonation){
-                        if($index > Impersonate::MAX) $impersonation->delete();
-                        $index++;
+                // attempt to find this Impersonation instance
+                $impersonate = Impersonate::where([
+                    ['user_id', '=', Auth::id()],
+                    ['imp_user_id', '=', $impersonated_user_id]
+                ])->first();
+
+                // check if this Impersonate already exists
+                if(is_null($impersonate)){
+                    // create new Impersonate record
+                    $impersonate = new Impersonate;
+                    $impersonate->user_id = Auth::id();
+                    $impersonate->imp_user_id = $impersonated_user_id;
+                    $impersonate->save();
+        
+                    // keep only the 5 most recent impersonations
+                    $impersonations = Impersonate::where('user_id', '=', Auth::id())->orderBy('updated_at', 'DESC')->get();
+                    if($impersonations->count() > Impersonate::MAX){
+                        $index = 1;
+                        foreach($impersonations as $impersonation){
+                            if($index > Impersonate::MAX) $impersonation->delete();
+                            $index++;
+                        }
                     }
+                }else{ // Impersonation already exists, so update the "updated_at"
+                    $impersonate->updated_at = Carbon::now();
+                    $impersonate->save();
                 }
             }
         }
