@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Card;
 use Illuminate\Http\Request;
 
+use Session;
+
 class CardController extends Controller
 {
     /**
@@ -25,7 +27,7 @@ class CardController extends Controller
      */
     public function create()
     {
-        //
+        return view('cards.create');
     }
 
     /**
@@ -36,18 +38,19 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|max:255',
+            'color' => 'required|max:7'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Card  $card
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Card $card)
-    {
-        //
+        $card = New Card;
+        $card->name = $request->name;
+        $card->color = $request->color;
+        $card->save();
+
+        Session::flash('success', 'Card created');
+
+        return redirect()->route('cards.index');
     }
 
     /**
@@ -58,7 +61,7 @@ class CardController extends Controller
      */
     public function edit(Card $card)
     {
-        //
+        return view('cards.edit')->with('card', $card);
     }
 
     /**
@@ -70,7 +73,15 @@ class CardController extends Controller
      */
     public function update(Request $request, Card $card)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'color' => 'required|max:7'
+        ]);
+            $card->name = $request->name;
+            $card->color = $request->color;
+            $card->save();
+
+        return redirect()->route('cards.index');
     }
 
     /**
@@ -81,6 +92,9 @@ class CardController extends Controller
      */
     public function destroy(Card $card)
     {
-        //
+        $card->cardLinks()->delete();
+        $card->delete();
+
+        return redirect()->route('cards.index');
     }
 }

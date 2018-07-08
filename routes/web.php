@@ -40,7 +40,7 @@ Route::group(['middleware' => 'impersonate'], function(){
     Route::impersonate();
 });
 
-Route::resource('cards', 'CardController');
+Route::resource('cards', 'CardController', ['except' => ['show']]);
 
 Route::get('/api/users', function(){
     return App\User::allImpersonatable();

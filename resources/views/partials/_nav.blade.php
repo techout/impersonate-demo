@@ -11,6 +11,7 @@
         <li class="nav-item {{Request::is('blog') ? 'active' : ''}}"><a class="nav-link" href="/blog">Blog</a></li>
             <li class="nav-item {{Request::is('about') ? 'active' : ''}}"><a class="nav-link" href="/about">About</a></li>
             <li class="nav-item {{Request::is('contact') ? 'active' : ''}}"><a class="nav-link" href="/contact">Contact</a></li>
+            <li class="nav-item {{Request::is('cards') ? 'active' : ''}}"><a class="nav-link" href="/cards">Cards</a></li>
         </ul>
 
         <ul class="navbar-nav">
