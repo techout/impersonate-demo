@@ -46,3 +46,8 @@
 .comments-title > span{
     margin-right: 15px;
 }
+
+table input{
+    height: 100%;
+    width: 100%;
+}

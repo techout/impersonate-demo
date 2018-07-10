@@ -18,6 +18,7 @@ class CreateCardLinksTable extends Migration
             $table->integer('card_id');
             $table->string('name');
             $table->string('url');
+            $table->integer('sort_by')->unsigned();
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\CardLink;
 use Illuminate\Http\Request;
 
 use Session;
@@ -77,9 +78,28 @@ class CardController extends Controller
             'name' => 'required|max:255',
             'color' => 'required|max:7'
         ]);
-            $card->name = $request->name;
-            $card->color = $request->color;
-            $card->save();
+
+        $card->name = $request->name;
+        $card->color = $request->color;
+        $card->save();
+
+        // remove cardLinks
+        $card->cardLinks()->delete();
+
+        // create and sync cardLinks
+        if($request->has('cardLinks')){
+            // validate cardLinks
+
+
+            for($index = 0; $index < count($request->cardLinks['name']); $index++){
+                $cardLink = New CardLink;
+                $cardLink->card_id = $card->id;
+                $cardLink->sort_by = $request->cardLinks['sort_by'][$index];
+                $cardLink->name = $request->cardLinks['name'][$index];
+                $cardLink->url = $request->cardLinks['url'][$index];
+                $cardLink->save();
+            }
+        }
 
         return redirect()->route('cards.index');
     }

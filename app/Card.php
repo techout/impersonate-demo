@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     public function cardLinks(){
-        return $this->hasMany('App\CardLink');
+        return $this->hasMany('App\CardLink')->orderBy('sort_by', 'ASC');
     }
 }
