@@ -74,7 +74,7 @@
                 ]).draw(false);
             });
 
-            $('button.rowRemove').on('click', function(){
+            $('table#cardLinks').on('click', 'button.rowRemove', function(){
                 $('table#cardLinks').DataTable().row($(this).parents('tr')).remove().draw();
             });
         });
