@@ -1,6 +1,6 @@
 @include('inc.js.jquery')
 @include('inc.js.bootstrap')
+@include('inc.js.datatables')
 
-{{Html::script('/js/datatables.min.js')}}
-
+@stack('js_imports')
 @stack('js')

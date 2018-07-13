@@ -14,6 +14,6 @@
     {!! Form::close() !!}
 @endsection
 
-@push('js')
+@push('js_imports')
     {{Html::script('/js/jscolor.js')}}
 @endPush

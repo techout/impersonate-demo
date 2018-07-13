@@ -33,20 +33,19 @@
     {!! Form::close() !!}
 @endsection
 
-@push('js')
+@push('js_imports')
     {!!Html::script('js/parsley.min.js')!!}
     {!!Html::script('js/select2.min.js')!!}
-    <script type="text/javascript">
-        $(".select2-multi").select2();
-    </script>
-
     {!!Html::script('https://cloud.tinymce.com/stable/tinymce.min.js')!!}
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'lists link',
-            menubar: false
-        });
-    </script>
+@endPush
+@push('js')
+<script>
+    $(".select2-multi").select2();
 
-@endpush
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'lists link',
+        menubar: false
+    });
+</script>
+@endPush

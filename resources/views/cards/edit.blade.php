@@ -22,62 +22,61 @@
 
         {{Form::JSColor('color', null, null, ['required' => ''], $card->color)}}
 
-        {{Form::label('links', 'Links')}}
-
-        <div class="float-right"><button type="button" class="btn btn-sm btn-success addRow"><i class="fas fa-plus-circle"></i></button></div>
-        <table class="table table-sm" id="cardLinks">
-            <thead>
-                <tr>
-                    <th>Sort By</th>
-                    <th>Name</th>
-                    <th>URL</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach($card->cardLinks as $cardLink)
-                <tr>
-                    <td><input type="text" name="cardLinks[sort_by][]" value="{{$cardLink->sort_by}}"></td>
-                    <td><input type="text" name="cardLinks[name][]" value="{{$cardLink->name}}"></td>
-                    <td><input type="text" name="cardLinks[url][]" value="{{$cardLink->url}}"></td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-danger rowRemove"><i class="fas fa-minus-circle"></i></button>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+        <div class="form-group">
+            {{Form::label('links', 'Links')}}
+            <div class="float-right"><button type="button" class="btn btn-sm btn-success dt-addRow"><i class="fas fa-plus-circle"></i></button></div>
+            <table class="table table-sm dataTable" id="cardLinks">
+                <thead>
+                    <tr>
+                        <th>Sort By</th>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($card->cardLinks as $cardLink)
+                    <tr>
+                        <td><input type="text" name="cardLinks[sort_by][]" value="{{$cardLink->sort_by}}"></td>
+                        <td><input type="text" name="cardLinks[name][]" value="{{$cardLink->name}}"></td>
+                        <td><input type="text" name="cardLinks[url][]" value="{{$cardLink->url}}"></td>
+                        <td><button type="button" class="btn btn-sm btn-danger dt-rowRemove"><i class="fas fa-minus-circle"></i></button></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
 
         {{Form::submit('Update Card', ['class' => 'btn btn-primary btn-block', 'style' => 'margin-top: 20px;'])}}
     {!! Form::close() !!}
 @endsection
 
-@push('js')
+@push('js_imports')
     {{Html::script('/js/jscolor.js')}}
+@endPush
 
-    <script>
-        $(document).ready(function(){
-            var table = $('table#cardLinks');
-            if(!table.length) return false;
-            if($.fn.DataTable.isDataTable(table)) table.DataTable().destroy();
-            
-            table.DataTable({
-                dom: 'tp'
-            });
-
-            $('button.addRow').on('click', function(){
-                $('table#cardLinks').DataTable().row.add([
-                    '<input type="text" name="cardLinks[sort_by][]">',
-                    '<input type="text" name="cardLinks[name][]">',
-                    '<input type="text" name="cardLinks[url][]">',
-                    '<button type="button" class="btn btn-sm btn-danger rowRemove"><i class="fas fa-minus-circle"></i></button>'
-                ]).draw(false);
-            });
-
-            $('table#cardLinks').on('click', 'button.rowRemove', function(){
-                $('table#cardLinks').DataTable().row($(this).parents('tr')).remove().draw();
-            });
+@push('js')
+<script>
+    $(document).ready(function(){
+        var table = $('table#cardLinks');
+        if(!table.length) return false;
+        if($.fn.DataTable.isDataTable(table)) table.DataTable().destroy();
+        
+        table.DataTable({
+            dom: 'tp'
         });
-    
-    </script>
+
+        $('button.dt-addRow').on('click', function(){
+            $table = $(this).closest('div.form-group').find('table');
+            if(!$table.length) return false;
+
+            $table.DataTable().row.add([$cells
+                '<input type="text" name="cardLinks[sort_by][]">',
+                '<input type="text" name="cardLinks[name][]">',
+                '<input type="text" name="cardLinks[url][]">',
+                '<button type="button" class="btn btn-sm btn-danger dt-rowRemove"><i class="fas fa-minus-circle"></i></button>'
+            ]).draw(false);
+        });
+    });
+</script>
 @endPush
