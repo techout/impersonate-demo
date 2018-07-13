@@ -20,7 +20,13 @@
     {!! Form::model($card, ['route' => ['cards.update', $card->id], 'method' => 'PUT', 'data-parsley-validate' => '']) !!}
         {{Form::TextGroup('name', null, null, null, ['required' => '', 'maxlength' => '255'])}}
 
-        {{Form::JSColor('color', null, null, ['required' => ''], $card->color)}}
+        {{Form::JSColor('bg', 'Background Color', null, ['required' => '', 'BWTarget' => '#font'], $card->bg)}}
+
+        <div class="form-group">
+            <label>Font Color</label>
+            <input type="text" id="font" class="form-control" style="background: #000000" disabled>
+            <small>calculated by "Background Color"</small>
+        </div>
 
         <div class="form-group">
             {{Form::label('links', 'Links')}}
@@ -52,7 +58,7 @@
 @endsection
 
 @push('js_imports')
-    {{Html::script('/js/jscolor.js')}}
+    @include('inc.js.jscolor')
 @endPush
 
 @push('js')
@@ -70,7 +76,7 @@
             $table = $(this).closest('div.form-group').find('table');
             if(!$table.length) return false;
 
-            $table.DataTable().row.add([$cells
+            $table.DataTable().row.add([
                 '<input type="text" name="cardLinks[sort_by][]">',
                 '<input type="text" name="cardLinks[name][]">',
                 '<input type="text" name="cardLinks[url][]">',

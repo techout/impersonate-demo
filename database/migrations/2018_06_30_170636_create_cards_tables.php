@@ -16,7 +16,8 @@ class CreateCardsTables extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('color', '7');
+            $table->string('bg', '7');
+            $table->string('font', '7');
             $table->timestamps();
         });
     }
