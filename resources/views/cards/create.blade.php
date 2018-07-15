@@ -8,13 +8,9 @@
     {!! Form::open(['route' => 'cards.store', 'data-parsley-validate' => '']) !!}
         {{Form::TextGroup('name', null, null, null, ['required' => '', 'maxlength' => '255'])}}
 
-        {{Form::JSColor('bg', 'Background Color', null, ['required' => '', 'BWTarget' => '#font'])}}
+        {{Form::JSColor('bg', 'Background Color', null, ['required' => '', 'BWTarget' => '#fcolor'])}}
 
-        <div class="form-group">
-            <label>Font Color</label>
-            <input type="text" id="font" class="form-control" style="background: #000000" disabled>
-            <small>calculated by "Background Color"</small>
-        </div>
+        {{Form::TextGroup('fcolor', 'Font Color', 'calculated by the "Background Color"', null, ['readonly' => 'readonly'])}}
 
         {{Form::submit('Create Card', ['class' => 'btn btn-success btn-block', 'style' => 'margin-top: 20px;'])}}
     {!! Form::close() !!}

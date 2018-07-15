@@ -42,13 +42,12 @@ class CardController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'bg' => 'required|max:7',
-            'font' => 'required|max:7'
         ]);
 
         $card = New Card;
         $card->name = $request->name;
         $card->bg = $request->bg;
-        $card->font = $request->font;
+        $card->font = fontColorCalculate($request->bg);
         $card->save();
 
         Session::flash('success', 'Card created');
@@ -79,12 +78,12 @@ class CardController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'bg' => 'required|max:7',
-            'font' => 'required|max:7'
         ]);
 
+        // save card data
         $card->name = $request->name;
         $card->bg = $request->bg;
-        $card->font = $request->font;
+        $card->font = fontColorCalculate($request->bg);
         $card->save();
 
         // remove cardLinks

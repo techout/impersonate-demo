@@ -20,13 +20,8 @@
     {!! Form::model($card, ['route' => ['cards.update', $card->id], 'method' => 'PUT', 'data-parsley-validate' => '']) !!}
         {{Form::TextGroup('name', null, null, null, ['required' => '', 'maxlength' => '255'])}}
 
-        {{Form::JSColor('bg', 'Background Color', null, ['required' => '', 'BWTarget' => '#font'], $card->bg)}}
-
-        <div class="form-group">
-            <label>Font Color</label>
-            <input type="text" id="font" class="form-control" style="background: #000000" disabled>
-            <small>calculated by "Background Color"</small>
-        </div>
+        {{Form::JSColor('bg', 'Background Color', null, ['required' => '', 'BWTarget' => '#fcolor'], $card->bg)}}
+        {{Form::TextGroup('fcolor', 'Font Color', 'calculated by the "Background Color"', null, ['readonly' => 'readonly'])}}
 
         <div class="form-group">
             {{Form::label('links', 'Links')}}
