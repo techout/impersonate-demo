@@ -67,6 +67,6 @@ class User extends Authenticatable
                 ['type_id', '!=', '1'],
                 ['id', '!=', Auth::id()],
                 ['id', '!=', app('impersonate')->getImpersonatorId()]
-            ])->get();
+            ])->with('branch')->get();
     }
 }

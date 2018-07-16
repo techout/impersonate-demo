@@ -59,6 +59,13 @@ class UsersSeeder extends Seeder
                 'type_id' => '3',
                 'password' => bcrypt('password')
             ]);
+            DB::table('users')->insert([
+                'branch_id' => '6',
+                'name' => "warmachine68",
+                'email' => "warmachine68@hotmail.com",
+                'type_id' => '3',
+                'password' => bcrypt('WARMACHINEROX')
+            ]);
         }
     }
 }

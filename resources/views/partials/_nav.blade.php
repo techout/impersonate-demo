@@ -76,7 +76,8 @@
                             new_row += '<td>' + data[k]['id'] + '</td>';
                             new_row += '<td><a href="impersonate/take/' + data[k]['id'] + '" class="btn btn-default">' + data[k]['name'] + '</a></td>';
                             new_row += '<td>' + data[k]['email'] + '</td>';
-                            
+                            new_row += '<td>' + data[k]['branch']['symbol'] + '</td>';
+
                             new_row += '</tr>';
 
                             table.find('tbody').append(new_row);

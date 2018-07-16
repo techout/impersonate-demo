@@ -14,6 +14,7 @@
                             <th>ID</th>
                             <th>User Name</th>
                             <th>Email</th>
+                            <th>Branch</th>
                         </tr>
                     </thead>
                     <tbody>
