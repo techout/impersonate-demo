@@ -13,15 +13,25 @@ class CardsSeeder extends Seeder
     {
         DB::table('cards')->insert([
             [
-                'name' => 'Accounting'
+                'name' => 'Accounting',
+                'bg' => randomHexColor(),
+                'font' => '#000000'
             ],[
-                'name' => 'Finance'
+                'name' => 'Finance',
+                'bg' => randomHexColor(),
+                'font' => '#000000'
             ],[
-                'name' => 'Information Technology'
+                'name' => 'Information Technology',
+                'bg' => randomHexColor(),
+                'font' => '#000000'
             ],[
-                'name' => 'Human Resource'
+                'name' => 'Human Resource',
+                'bg' => randomHexColor(),
+                'font' => '#000000'
             ],[
-                'name' => 'Security'
+                'name' => 'Security',
+                'bg' => randomHexColor(),
+                'font' => '#000000'
             ]
         ]);
     }

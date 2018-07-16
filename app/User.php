@@ -31,6 +31,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function branch(){
+        return $this->belongsTo('App\Branch');
+    }
+
     public function impersonates(){
         return $this->hasMany('App\Impersonate');
     }
