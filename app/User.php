@@ -39,6 +39,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Impersonate');
     }
 
+    public function permissions(){
+        return $this->belongsToMany('App\Permission');
+    }
+
     public function posts(){
         return $this->hasMany('App\Post');
     }
@@ -68,5 +72,15 @@ class User extends Authenticatable
                 ['id', '!=', Auth::id()],
                 ['id', '!=', app('impersonate')->getImpersonatorId()]
             ])->with('branch')->get();
+    }
+
+    /////////////////////////////////////////////
+    // Permission functions
+    /////////////////////////////////////////////
+    public function hasPermission($name, $obj_id){
+        return $this->permissions()->where([
+                ['name', $name],
+                ['obj_id', $obj_id]
+            ])->first() != null;
     }
 }

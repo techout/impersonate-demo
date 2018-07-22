@@ -6,6 +6,7 @@ use App\Card;
 use App\CardLink;
 use Illuminate\Http\Request;
 
+use Auth;
 use Session;
 
 class CardController extends Controller
@@ -63,7 +64,13 @@ class CardController extends Controller
      */
     public function edit(Card $card)
     {
-        return view('cards.edit')->with('card', $card);
+        if(Auth::user()->hasPermission('Card-Edit', $card->id)){
+            return view('cards.edit')->with('card', $card);
+        }else{
+            Session::flash('danger', "You don't have access to that page.");
+
+            return redirect()->route('cards.index');
+        }
     }
 
     /**

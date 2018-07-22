@@ -8,11 +8,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header" style="background-color: {{$card->bg}}; color: {{$card->font}};">
-                        {{$card->name}}
-                        <div class="float-right">
-                            <a href="{{route('cards.edit', $card->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                            <a href="{{route('cards.destroy', $card->id)}}" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></a>
-                        </div>
+                        <span>{{$card->name}}</span>
+                        @auth
+                            @if(Auth::user()->hasPermission('Card-Edit', $card->id))
+                                <div class="float-right">
+                                    <a href="{{route('cards.edit', $card->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                </div>
+                            @endIf
+                        @endAuth
                     </div>
                     <div class="card-body">
                         @foreach($card->cardLinks as $cardLink)

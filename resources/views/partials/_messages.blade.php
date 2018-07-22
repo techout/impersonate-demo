@@ -7,6 +7,15 @@
     </div>
 @endif
 
+@if(Session::has('danger'))
+    <div class="alert alert-danger alert-dismissable" role="alert">
+        {{Session::get('danger')}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 @if(count($errors) > 0)
     <div class="alert alert-danger alert-dismissable" role="alert">
         <strong>Errors:</strong>
