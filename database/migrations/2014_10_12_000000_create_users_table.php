@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('branch_id')->unsigned();
+            $table->foreign('branch_id')->references('id')->on('branches');
             $table->string('name', 255);
             $table->string('email')->unique();
             $table->string('password', 255);

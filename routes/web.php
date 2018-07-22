@@ -41,6 +41,8 @@ Route::group(['middleware' => 'impersonate'], function(){
 });
 
 Route::resource('cards', 'CardController', ['except' => ['show']]);
+Route::resource('users', 'UserController');
+
 
 Route::get('/api/users', function(){
     return App\User::allImpersonatable();
