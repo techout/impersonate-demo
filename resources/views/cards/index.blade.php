@@ -9,13 +9,11 @@
                 <div class="card">
                     <div class="card-header" style="background-color: {{$card->bg}}; color: {{$card->font}};">
                         <span>{{$card->name}}</span>
-                        @auth
-                            @if(Auth::user()->hasPermission('Card-Edit', $card->id))
-                                <div class="float-right">
-                                    <a href="{{route('cards.edit', $card->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                                </div>
-                            @endIf
-                        @endAuth
+                        @permission(['Card-Edit', $card->id])
+                            <div class="float-right">
+                                <a href="{{route('cards.edit', $card->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                            </div>
+                        @endpermission
                     </div>
                     <div class="card-body">
                         @foreach($card->cardLinks as $cardLink)
